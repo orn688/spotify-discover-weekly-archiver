@@ -1,0 +1,27 @@
+region: us-east-1
+
+function_name: spotify_archiver
+handler: service.handler
+description: 
+runtime: python2.7
+
+# S3 upload requires appropriate role with s3:PutObject permission
+# (ex. basic_s3_upload), a destination bucket, and the key prefix
+# bucket_name: 'example-bucket'
+# s3_key_prefix: 'path/to/file/'
+
+aws_access_key_id: ${AWS_ACCESS_KEY_ID}
+aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+
+# dist_directory: dist
+# timeout: 15
+# memory_size: 512
+
+environment_variables:
+    spotify_client_id: ${SPOTIFY_CLIENT_ID}
+    spotify_client_secret: ${SPOTIFY_CLIENT_SECRET}
+    spotify_access_token: ${SPOTIFY_ACCESS_TOKEN}
+    archive_playlist: Discover Weekly Archive
+
+build:
+  source_directories: spotify_archiver

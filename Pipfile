@@ -8,7 +8,15 @@ name = "pypi"
 [packages]
 
 python-lambda = "*"
+spotipy = "*"
+flask = "*"
+requests = "*"
 
 
 [dev-packages]
 
+
+
+[requires]
+
+python_version = "3.6"
