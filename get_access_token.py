@@ -68,5 +68,5 @@ def callback():
 
 if __name__ == '__main__':
     port = 5000
-    webbrowser.open_new_tab('http://localhost:{0}/'.format(port))
+    webbrowser.open_new_tab(f'http://localhost:{port}/')
     app.run(debug=True, port=port)

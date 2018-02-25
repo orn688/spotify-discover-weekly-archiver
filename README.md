@@ -4,6 +4,8 @@ AWS lambda function to archive your Spotify Discover Weekly playlist.
 
 ## Setup
 
+(Requires Python 3.6+)
+
 Set up a Spotify API application:
 
 1. Log in to the [Spotify developer dashboard](https://beta.developer.spotify.com/dashboard/applications) and create an application.
@@ -12,8 +14,8 @@ Set up a Spotify API application:
 Set up a local development environment:
 
 ```sh
-$ pip install pipenv # If you don't already have Pipenv installed.
+$ pip install pipenv  # If you don't already have Pipenv installed.
 $ pipenv --python 3.6
 $ pipenv install
-$ pipenv run python setup.py # And follow the instructions presented.
+$ pipenv run python setup.py  # And follow the instructions presented.
 ```
