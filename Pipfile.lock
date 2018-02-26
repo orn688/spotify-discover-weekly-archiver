@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7b4b60ba5c311d591a79911d592b34768db4c810017a46f68400d1506bb4cd3e"
+            "sha256": "4448bacc693c87848f8901f0dcd777bc6d8e4d32ee6b86a8d695dbe82efb6cfa"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -178,12 +178,6 @@
                 "sha256:105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
             ],
             "version": "==1.10.0"
-        },
-        "spotipy": {
-            "hashes": [
-                "sha256:4b05da481b5c5dd4d1da8c0f0d13ca805dde037db648d12be866244b19501ed1"
-            ],
-            "version": "==2.4.4"
         },
         "urllib3": {
             "hashes": [

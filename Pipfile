@@ -8,8 +8,7 @@ name = "pypi"
 [packages]
 
 python-lambda = "*"
-spotipy = "*"
-flask = "*"
+Flask = "*"
 requests = "*"
 
 
