@@ -1,9 +1,6 @@
 import os
-import fileinput
-import sys
 import uuid
 import webbrowser
-from multiprocessing import Process
 
 import requests
 from flask import Flask, redirect, request
@@ -57,7 +54,7 @@ def url_for_code(redirect_uri_hostname):
         scope=' '.join(['playlist-read-private', 'playlist-modify-private']),
     )
 
-    query_string = '&'.join(f'{key}={val}' for key, val in query_params.items())
+    query_string = '&'.join(f'{k}={v}' for k, v in query_params.items())
 
     return 'https://accounts.spotify.com/authorize?' + query_string
 

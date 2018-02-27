@@ -2,7 +2,7 @@ region: us-east-1
 
 function_name: spotify_archiver
 handler: service.handler
-description: 
+description: A lambda to save your Spotify Discover Weekly songs to another playlist
 runtime: python3.6
 
 aws_access_key_id: ${AWS_ACCESS_KEY_ID}

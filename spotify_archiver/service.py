@@ -23,6 +23,7 @@ def handler(event=None, context=None):
 
 def get_my_id(session):
     response = session.get(BASE_URL + '/me')
+
     me = response.json()
 
     return me['id']
@@ -46,7 +47,7 @@ def get_playlist_uris(session, my_id):
                 discover_weekly_uri = playlist['uri']
             elif playlist['name'] == 'Discover Weekly Archive':
                 archive_uri = playlist['uri']
-            
+
             if discover_weekly_uri and archive_uri:
                 break
 
@@ -96,12 +97,14 @@ def get_authenticated_session():
 
     raw_auth_header = f'{client_id}:{client_secret}'.encode()
     encoded_auth_header = base64.b64encode(raw_auth_header).decode()
+
     session.headers['Authorization'] = f'Basic {encoded_auth_header}'
 
     payload = {
         'grant_type': 'refresh_token',
         'refresh_token': refresh_token,
     }
+
     response = session.post('https://accounts.spotify.com/api/token', payload)
 
     assert response.status_code == 200, response.text

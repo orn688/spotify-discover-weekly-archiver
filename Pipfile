@@ -8,12 +8,14 @@ name = "pypi"
 [packages]
 
 python-lambda = "*"
-Flask = "*"
+flask = "*"
 requests = "*"
 
 
 [dev-packages]
 
+"flake8" = "*"
+isort = "*"
 
 
 [requires]
