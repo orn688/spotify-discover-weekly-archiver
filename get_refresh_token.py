@@ -86,10 +86,10 @@ def write_token_to_env_file(refresh_token):
 
 def shutdown_server_when_finished():
     # source: http://flask.pocoo.org/snippets/67/
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
+    shutdown_func = request.environ.get('werkzeug.server.shutdown')
+    if shutdown_func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
-    func()
+    shutdown_func()
 
 
 if __name__ == '__main__':
