@@ -38,12 +38,14 @@ def callback():
     assert response.status_code == 200
 
     refresh_token = response.json()['refresh_token']
+    access_token = response.json()['access_token']
+    print(access_token)
     write_token_to_env_file(refresh_token)
 
     shutdown_server_when_finished()
 
     return ('Successfully saved Spotify refresh token to .env file. Shutting '
-            "down server (it's safe to close this page).")
+            'down server (it\'s safe to close this page).')
 
 
 def url_for_code(redirect_uri_hostname):
@@ -78,17 +80,19 @@ def write_token_to_env_file(refresh_token):
                 wrote_refresh_token = True
 
     if not wrote_refresh_token:
-        updated_lines.append(f'{refresh_token_name}={refresh_token}')
+        lines.append(f'{refresh_token_name}={refresh_token}')
 
     with open(env_file_name, 'w') as env_file:
-        env_file.write(''.join(line for line in updated_lines))
+        env_file.write(''.join(line for line in lines))
 
 
 def shutdown_server_when_finished():
     # source: http://flask.pocoo.org/snippets/67/
     shutdown_func = request.environ.get('werkzeug.server.shutdown')
+
     if shutdown_func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
+
     shutdown_func()
 
 

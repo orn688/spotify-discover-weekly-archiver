@@ -15,8 +15,7 @@ aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
 environment_variables:
     spotify_client_id: ${SPOTIFY_CLIENT_ID}
     spotify_client_secret: ${SPOTIFY_CLIENT_SECRET}
-    spotify_refresh_token: ${SPOTIFY_ACCESS_TOKEN}
-    archive_playlist: Discover Weekly Archive
+    spotify_refresh_token: ${SPOTIFY_REFRESH_TOKEN}
 
 build:
   source_directories: spotify_archiver
