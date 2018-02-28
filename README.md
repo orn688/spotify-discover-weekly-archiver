@@ -23,12 +23,10 @@ AWS lambda function to archive your Spotify Discover Weekly playlist.
     1. `cp template.env .env`
     2. Set the AWS credentials and Spotify client ID and client secret in `.env`
 
-4. Get a refresh token for your Spotify account:
+4. Get a refresh token for your Spotify account (after running this command, you will need to sign into Spotify in your browser, upon which a refresh token will be added to your `.env` so that the Spotify API application you made can access your Spotify account.
   
   ```
   pipenv run get_refresh_token.py
   ```
-
-  This require you to sign into Spotify in your browser, and will automatically add to your `.env` file the refresh token necessary to access your Spotify account via the Spotify API application you made.
 
 5. Deploy! TODO: how?
