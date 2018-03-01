@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import base64
+import logging
 import os
 
 import requests
 
 BASE_URL = 'https://api.spotify.com/v1'
+logger = logging.getLogger(__name__)
 
 
 class SpotifyError(RuntimeError):
@@ -16,6 +18,8 @@ def handler(event=None, context=None):
 
     my_id = get_my_id(session)
 
+    # This could be done in two separate calls to a more reusable function,
+    # but this avoids unecessary requests to the Spotify API.
     discover_weekly_id, archive_id = get_playlist_ids(session, my_id)
 
     discover_weekly_tracks = get_playlist_tracks(
@@ -94,7 +98,7 @@ def add_tracks_to_playlist(session, user_id, playlist_id, tracks):
     track_uris = remove_duplicates(session, user_id, playlist_id, track_uris)
 
     if len(track_uris) == 0:
-        print('No new tracks to add; exiting')
+        logger.info('No new tracks to add; exiting')
         return
 
     payload = {
@@ -105,6 +109,8 @@ def add_tracks_to_playlist(session, user_id, playlist_id, tracks):
     response = session.post(url, json=payload)
 
     assert response.status_code == 201, response.json()['error']
+
+    logger.info(f'Archived {len(track_uris)} track(s)')
 
 
 def remove_duplicates(session, user_id, playlist_id, track_uris):
