@@ -1,6 +1,6 @@
 # Spotify Discover Weekly Archiver
 
-AWS lambda function to archive your Spotify Discover Weekly playlist.
+AWS lambda function to archive your Spotify Discover Weekly playlist. Built using [python-lambda](https://github.com/nficano/python-lambda).
 
 ## Setup
 

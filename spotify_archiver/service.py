@@ -58,19 +58,44 @@ def get_playlist_ids(session, my_id):
                        'Archive playlists in user\'s account.')
 
 
-def get_playlist_tracks(session, user_id, playlist_id):
-    url = BASE_URL + f'/users/{user_id}/playlists/{playlist_id}/tracks'
-    response = session.get(url)
+def get_playlist_tracks(session, user_id, playlist_id, count=None):
+    tracks = []
 
-    playlist_tracks = response.json()['items']
+    url_path = f'/users/{user_id}/playlists/{playlist_id}/tracks'
+    next_page_url = BASE_URL + url_path
 
-    return [track['track'] for track in playlist_tracks]
+    while next_page_url:
+        if count:
+            remaining_count = count - len(tracks)
+
+            if remaining_count <= 0:
+                break
+        else:
+            remaining_count = None
+
+        response = session.get(next_page_url)
+
+        page_of_tracks = response.json()['items']
+        if remaining_count is not None:
+            page_of_tracks = page_of_tracks[:remaining_count]
+
+        tracks.extend(page_of_tracks)
+
+        next_page_url = response.json()['next']
+
+    return [track['track'] for track in tracks]
 
 
 def add_tracks_to_playlist(session, user_id, playlist_id, tracks):
     # At most 100 tracks can be passed in one request (DW is generally only 30
     # tracks long)
     track_uris = [track['uri'] for track in tracks][:100]
+
+    track_uris = remove_duplicates(session, user_id, playlist_id, track_uris)
+
+    if len(track_uris) == 0:
+        print('No new tracks to add; exiting')
+        return
 
     payload = {
         'uris': track_uris,
@@ -80,6 +105,15 @@ def add_tracks_to_playlist(session, user_id, playlist_id, tracks):
     response = session.post(url, json=payload)
 
     assert response.status_code == 201, response.json()['error']
+
+
+def remove_duplicates(session, user_id, playlist_id, track_uris):
+    existing_tracks = get_playlist_tracks(session, user_id, playlist_id)
+    existing_track_uris = [track['uri'] for track in existing_tracks]
+
+    filtered_track_uris = set(track_uris).difference(existing_track_uris)
+
+    return list(filtered_track_uris)
 
 
 def get_authenticated_session():
